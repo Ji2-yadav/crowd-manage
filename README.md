@@ -4,17 +4,50 @@ Real-time crowd monitoring and safety management system for large events.
 
 ## Project Structure
 
-```
-project-drishti/
-├── simulator/          # Venue simulation service
-│   ├── backend/        # Flask API (port 3001)
-│   └── frontend/       # Dashboard UI
-├── agent/              # AI monitoring service  
-│   ├── backend/        # Gemini agent API (port 5001)
-│   └── frontend/       # Chat interface
-└── docs/               # API documentation
-```
 
+```
+.
+├── README.md
+├── backend
+│   ├── agent-backend
+│   │   ├── Dockerfile
+│   │   ├── conversation_api.py
+│   │   ├── conversation_script.py
+│   │   ├── db
+│   │   │   ├
+│   │   │   ├── llm_logger.py
+│   │   │   └── trigger_manager.py
+│   │   ├── deploy.txt
+│   │   ├── gemini_helpers.py
+│   │   ├── requirements.txt
+│   │   └── tools.py
+│   └── simulator-backend
+│       ├── Dockerfile
+│       ├── deploy.txt
+│       ├── requirements.txt
+│       └── server.py
+├── frontend
+│   ├── agent
+│   │   ├── README.md
+│   │   └── frontend
+│   │       ├── chat-app.js
+│   │       ├── chat-styles.css
+│   │       ├── chat.html
+│   │       ├── config.js
+│   │       └── speech-services.js
+│   ├── deploy.sh
+│   ├── index.html
+│   └── simulator
+│       ├── README.md
+│       └── frontend
+│           ├── app.js
+│           ├── config.js
+│           ├── firebase.json
+│           ├── index.html
+│           └── styles.css
+└── requirements.txt
+
+```
 ## Quick Start
 
 ### 1. Simulator Service
