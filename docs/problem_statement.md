@@ -1,0 +1,11 @@
+Improving safety at large public events
+
+    The Challenge: Large-scale public events like music festivals or rallies are incredibly complex to manage. The fluid dynamics of large crowds create significant risks, from dangerous bottlenecks and crushing to difficulties in locating individuals in medical distress. Security teams need a way to move from reactive monitoring to proactive, intelligent intervention.
+    The Objective: Build "Project Drishti," an AI-powered situational awareness platform that acts as a central nervous system for event safety. This agent should provide actionable intelligence to commanders, enabling them to anticipate and mitigate risks in real-time. The agent should:
+        Perform Predictive Bottleneck Analysis: Ingest real-time video feeds (from drones or fixed cameras) into Vertex AI Vision to analyze crowd density, velocity, and flow. Use this data with Vertex AI Forecasting to predict potential bottlenecks 15–20 minutes in advance, allowing for proactive crowd management.
+        Deliver AI-Powered Situational Summaries: Allow commanders to query the system in natural language (e.g., "Summarize security concerns in the West Zone"). The agent will use a Gemini model to fuse alerts from video analytics, security reports, and social media into a concise, actionable briefing.
+        Automate Intelligent Resource Dispatch: When an incident is flagged (e.g., a medical emergency reported via an app), the agent, built with Vertex AI Agent Builder, should instantly identify the incident location, find the nearest available response unit via GPS, and dispatch them with the fastest, least congested route on Google Maps.
+        Detect Multimodal Anomalies: Continuously scan live feeds with a multimodal Gemini model to detect anomalies beyond crowd counts, such as smoke, fire, or the visual signature of a panicked crowd surge, triggering immediate, high-priority alerts.
+        Go Beyond: Innovate with features like an AI-powered Lost & Found that uses photo matching to scan feeds for a missing person, crowd sentiment analysis to detect rising panic, or the ability for the agent to autonomously dispatch a drone for a closer look at a high-priority incident.
+    Tech Stack: Use of Google AI technologies is mandatory.
+    Special prize for using Firebase Studio and deploying the project.
