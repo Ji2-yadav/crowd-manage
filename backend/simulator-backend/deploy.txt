@@ -1,0 +1,9 @@
+gcloud builds submit --tag gcr.io/photosyn2/simulator-backend
+
+# Deploy to Cloud Run
+gcloud run deploy simulator-backend \
+  --image gcr.io/photosyn2/simulator-backend \
+  --platform managed \
+  --region us-central1 \
+  --allow-unauthenticated \
+  --port 3001

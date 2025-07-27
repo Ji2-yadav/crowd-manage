@@ -1,0 +1,571 @@
+/* Modern Simulator UI - Clean Professional Design */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #f8fafc;
+    color: #0f172a;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: #ffffff;
+}
+
+/* Modern Header */
+header {
+    background: #0f172a;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 1.25rem;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.status-bar {
+    display: flex;
+    gap: 2rem;
+    font-size: 0.875rem;
+    color: #94a3b8;
+}
+
+#connection-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#connection-status::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #ef4444;
+    transition: background-color 0.3s ease;
+}
+
+#connection-status.connected::before {
+    background-color: #10b981;
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+}
+
+/* Main Layout */
+main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: #f8fafc;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: calc(100vh - 140px);
+    overflow-y: auto;
+}
+
+.control-panel {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.control-panel h2 {
+    color: #0f172a;
+    margin-bottom: 1rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.instructions {
+    font-size: 0.875rem;
+    color: #64748b;
+    margin-bottom: 1rem;
+}
+
+/* Event Buttons - Modern Design */
+.event-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.event-btn {
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    color: #334155;
+    padding: 0.875rem 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+}
+
+.event-btn:hover {
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+    transform: translateX(4px);
+}
+
+.event-btn.active {
+    background: #3b82f6;
+    border-color: #3b82f6;
+    color: white;
+    box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
+}
+
+.event-btn .icon {
+    font-size: 1.25rem;
+    width: 24px;
+    text-align: center;
+}
+
+.selected-event {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    background: #eff6ff;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 0.875rem;
+    color: #1e40af;
+    border: 1px solid #dbeafe;
+}
+
+#selected-event-type {
+    font-weight: 600;
+}
+
+/* Venue Map */
+.venue-map {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.venue-map h2 {
+    color: #0f172a;
+    margin-bottom: 1.25rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+/* SVG Map Container */
+.zones-container {
+    position: relative;
+    height: calc(100vh - 240px);
+    min-height: 450px;
+    display: flex;
+    flex-direction: column;
+}
+
+.venue-svg-map {
+    width: 100%;
+    height: 100%;
+    background: #f8fafc;
+    border-radius: 12px;
+}
+
+/* Zone Shapes */
+.zone-shape {
+    fill: #ffffff;
+    stroke: #e2e8f0;
+    stroke-width: 2;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.zone-shape:hover {
+    stroke: #3b82f6;
+    stroke-width: 3;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+}
+
+.zone-group.selected .zone-shape {
+    fill: #eff6ff;
+    stroke: #3b82f6;
+    stroke-width: 3;
+    filter: drop-shadow(0 0 0 3px rgba(59, 130, 246, 0.1));
+}
+
+/* Zone Labels */
+.zone-label {
+    font-size: 16px;
+    font-weight: 600;
+    fill: #0f172a;
+    text-anchor: middle;
+    pointer-events: none;
+}
+
+.zone-people {
+    font-size: 12px;
+    fill: #64748b;
+    pointer-events: none;
+}
+
+/* Decorative Labels */
+.gate-label, .stage-label {
+    font-size: 11px;
+    fill: #94a3b8;
+    font-weight: 500;
+}
+
+/* Density Colors for Zones */
+.zone-shape.density-low {
+    fill: #d1fae5;
+    stroke: #10b981;
+}
+
+.zone-shape.density-medium {
+    fill: #fef3c7;
+    stroke: #f59e0b;
+}
+
+.zone-shape.density-high {
+    fill: #fed7aa;
+    stroke: #f97316;
+}
+
+.zone-shape.density-critical {
+    fill: #fee2e2;
+    stroke: #ef4444;
+}
+
+/* Alert Icons in SVG */
+.zone-alert-icon {
+    width: 28px;
+    height: 28px;
+    rx: 6;
+    fill: white;
+    stroke: #e2e8f0;
+    stroke-width: 1;
+}
+
+.zone-alert-emoji {
+    font-size: 16px;
+    text-anchor: middle;
+    dominant-baseline: central;
+    pointer-events: none;
+}
+
+/* Medical Emergency Blinking for SVG */
+.zone-alert-icon.medical-emergency {
+    animation: medical-blink-svg 1s ease-in-out infinite;
+}
+
+@keyframes medical-blink-svg {
+    0%, 100% { 
+        fill: #fee2e2;
+        stroke: #ef4444;
+        filter: drop-shadow(0 0 0 rgba(239, 68, 68, 0.2));
+    }
+    50% { 
+        fill: #fecaca;
+        stroke: #dc2626;
+        filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.6));
+    }
+}
+
+/* Zone with medical emergency gets subtle red tint */
+.zone-shape.has-medical {
+    animation: medical-zone-pulse 2s ease-in-out infinite;
+}
+
+@keyframes medical-zone-pulse {
+    0%, 100% {
+        fill: #ffffff;
+    }
+    50% {
+        fill: #fef2f2;
+    }
+}
+
+/* Fire Pulse Animation for SVG */
+.zone-shape.has-fire {
+    animation: fire-pulse-svg 0.8s infinite;
+    filter: drop-shadow(0 0 12px rgba(239, 68, 68, 0.4));
+}
+
+@keyframes fire-pulse-svg {
+    0%, 100% { 
+        fill: #fef2f2;
+        stroke: #f87171;
+        stroke-width: 2;
+        filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.3));
+    }
+    25% {
+        fill: #fecaca;
+        stroke: #ef4444;
+        stroke-width: 3;
+        filter: drop-shadow(0 0 16px rgba(239, 68, 68, 0.6));
+    }
+    50% { 
+        fill: #fee2e2;
+        stroke: #dc2626;
+        stroke-width: 3;
+        filter: drop-shadow(0 0 20px rgba(239, 68, 68, 0.8));
+    }
+    75% {
+        fill: #fecaca;
+        stroke: #ef4444;
+        stroke-width: 3;
+        filter: drop-shadow(0 0 16px rgba(239, 68, 68, 0.6));
+    }
+}
+
+/* Map Legend */
+.map-legend {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: white;
+    padding: 12px 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+}
+
+.legend-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+    margin-bottom: 8px;
+}
+
+.legend-items {
+    display: flex;
+    gap: 12px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: #64748b;
+}
+
+.legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
+}
+
+.legend-color.density-low {
+    background: #d1fae5;
+    border-color: #10b981;
+}
+
+.legend-color.density-medium {
+    background: #fef3c7;
+    border-color: #f59e0b;
+}
+
+.legend-color.density-high {
+    background: #fed7aa;
+    border-color: #f97316;
+}
+
+.legend-color.density-critical {
+    background: #fee2e2;
+    border-color: #ef4444;
+}
+
+.density-low { background: linear-gradient(90deg, #10b981, #059669); }
+.density-medium { background: linear-gradient(90deg, #f59e0b, #d97706); }
+.density-high { background: linear-gradient(90deg, #f97316, #ea580c); }
+.density-critical { background: linear-gradient(90deg, #ef4444, #dc2626); }
+
+/* Fire Animation */
+.zone.has-fire {
+    animation: fire-pulse 1s infinite;
+}
+
+@keyframes fire-pulse {
+    0%, 100% { 
+        background-color: #f8fafc;
+        border-color: #e2e8f0;
+    }
+    50% { 
+        background-color: #fef2f2;
+        border-color: #fca5a5;
+    }
+}
+
+/* Info Panel */
+.info-panel {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    flex: 1;
+}
+
+.info-panel h2 {
+    color: #0f172a;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.zone-details {
+    background: #f8fafc;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+}
+
+.personnel-list, .gates-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.personnel-item, .gate-item {
+    background: #f8fafc;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.875rem;
+    border: 1px solid #e2e8f0;
+    transition: all 0.2s ease;
+}
+
+.personnel-item:hover, .gate-item:hover {
+    background: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Status Badges */
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-available { 
+    background: #d1fae5; 
+    color: #065f46;
+}
+
+.status-dispatched { 
+    background: #fed7aa; 
+    color: #7c2d12;
+}
+
+.status-open { 
+    background: #d1fae5; 
+    color: #065f46;
+}
+
+.status-closed { 
+    background: #fee2e2; 
+    color: #7f1d1d;
+}
+
+/* Footer */
+footer {
+    background: white;
+    border-top: 1px solid #e2e8f0;
+    padding: 1rem 1.5rem;
+}
+
+.console-log h3 {
+    color: #0f172a;
+    margin-bottom: 0.75rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+}
+
+.event-log-content {
+    background: #0f172a;
+    border-radius: 8px;
+    padding: 1rem;
+    height: 100px;
+    overflow-y: auto;
+    font-family: 'SF Mono', Monaco, monospace;
+    font-size: 0.8125rem;
+    color: #e2e8f0;
+}
+
+.log-entry {
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+
+.log-timestamp {
+    color: #64748b;
+    margin-right: 0.75rem;
+}
+
+.log-success { color: #10b981; }
+.log-error { color: #ef4444; }
+.log-warning { color: #f59e0b; }
+.log-info { color: #3b82f6; }
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Responsive */
+@media (max-width: 1400px) {
+    main {
+        grid-template-columns: 280px 1fr;
+    }
+}
+
+@media (max-width: 1200px) {
+    .zones-container {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, minmax(140px, 1fr));
+    }
+}

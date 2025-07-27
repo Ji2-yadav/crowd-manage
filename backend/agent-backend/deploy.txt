@@ -1,0 +1,12 @@
+gcloud builds submit --tag gcr.io/photosyn2/agent-backend
+
+# Deploy to Cloud Run (REMOVE --port 5001)
+gcloud run deploy agent-backend \
+  --image gcr.io/photosyn2/agent-backend \
+  --platform managed \
+  --region us-central1 \
+  --allow-unauthenticated \
+  --set-env-vars GEMINI_API_KEY=AIzaSyBcKxFB8dqHXmFq0TJrtkTJxbp1BflO260 \
+  --timeout 3600 \
+  --memory 1Gi \
+  --cpu 1
